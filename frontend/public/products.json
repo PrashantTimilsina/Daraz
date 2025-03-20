@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "title": "Gaming Laptop",
+    "image": "https://m.media-amazon.com/images/I/61BuT2yTQ6S._AC_SL1500_.jpg",
+    "price": 120000,
+    "category": "Gaming",
+    "warrantyAvailable": true,
+    "cashOnDelivery": true,
+    "location": "Kathmandu"
+  },
+  {
+    "id": 2,
+    "title": "Mechanical Gaming Keyboard",
+    "image": "https://m.media-amazon.com/images/I/71fRP7KY9hL._AC_SL1500_.jpg",
+    "price": 5500,
+    "category": "Gaming",
+    "warrantyAvailable": true,
+    "cashOnDelivery": false,
+    "location": "Pokhara"
+  },
+  {
+    "id": 3,
+    "title": "Wireless Gaming Mouse",
+    "image": "https://m.media-amazon.com/images/I/61wQNtMZHgL._AC_SL1500_.jpg",
+    "price": 3500,
+    "category": "Gaming",
+    "warrantyAvailable": true,
+    "cashOnDelivery": true,
+    "location": "Lalitpur"
+  },
+  {
+    "id": 4,
+    "title": "Gaming Headset",
+    "image": "https://m.media-amazon.com/images/I/61CGHv6kmWL._AC_SL1500_.jpg",
+    "price": 4500,
+    "category": "Gaming",
+    "warrantyAvailable": false,
+    "cashOnDelivery": true,
+    "location": "Chitwan"
+  },
+  {
+    "id": 5,
+    "title": "4K Gaming Monitor",
+    "image": "https://cdn.thewirecutter.com/wp-content/media/2023/06/4kmonitors-2048px-9794.jpg",
+    "price": 65000,
+    "category": "Gaming",
+    "warrantyAvailable": true,
+    "cashOnDelivery": false,
+    "location": "Bhaktapur"
+  },
+  {
+    "id": 6,
+    "title": "Gaming Chair",
+    "image": "https://i5.walmartimages.com/seo/GTPLAYER-Gaming-Chair-with-Footrest-and-Ergonomic-Lumbar-Massage-Pillow-Faux-Leather-Office-Chair-White_86133479-a937-469b-bf4f-90a3f05e6b93.2550a814977ea264f357b78c66fc3c04.jpeg",
+    "price": 18000,
+    "category": "Gaming",
+    "warrantyAvailable": true,
+    "cashOnDelivery": true,
+    "location": "Pokhara"
+  },
+  {
+    "id": 7,
+    "title": "RGB Gaming Desk",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnoWE67KXxGMftqxCQOlmjzFw0t2fEmHtJ9Q&s",
+    "price": 20000,
+    "category": "Gaming",
+    "warrantyAvailable": true,
+    "cashOnDelivery": false,
+    "location": "Lalitpur"
+  },
+  {
+    "id": 8,
+    "title": "Gaming Controller",
+    "image": "https://m.media-amazon.com/images/I/61qItTcisGL._AC_SL1000_.jpg",
+    "price": 4000,
+    "category": "Gaming",
+    "warrantyAvailable": true,
+    "cashOnDelivery": true,
+    "location": "Kathmandu"
+  },
+  {
+    "id": 9,
+    "title": "Gaming Router",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8EAkoMRhqEm6N1e43Z7maQ9_EdCStD9Rg2Q&s",
+    "price": 12000,
+    "category": "Gaming",
+    "warrantyAvailable": true,
+    "cashOnDelivery": false,
+    "location": "Pokhara"
+  },
+  {
+    "id": 10,
+    "title": "Men's Hoodie",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8GuRrhbt4Y-NzvbgxE-f0k6M8cWd4DtKmLA&s",
+    "price": 2500,
+    "category": "Clothes",
+    "warrantyAvailable": false,
+    "cashOnDelivery": true,
+    "location": "Chitwan"
+  },
+  {
+    "id": 11,
+    "title": "Women's Jacket",
+    "image": "https://m.media-amazon.com/images/I/616C3BuGw2L._AC_SL1500_.jpg",
+    "price": 3500,
+    "category": "Clothes",
+    "warrantyAvailable": true,
+    "cashOnDelivery": true,
+    "location": "Lalitpur"
+  },
+  {
+    "id": 12,
+    "title": "Casual Sneakers",
+    "image": "https://s.alicdn.com/@sc04/kf/H04cd2d458bef4e809ac3a7fe918e7e71P.jpg_720x720q50.jpg",
+    "price": 3000,
+    "category": "Clothes",
+    "warrantyAvailable": false,
+    "cashOnDelivery": true,
+    "location": "Kathmandu"
+  },
+  {
+    "id": 13,
+    "title": "Formal Shirt",
+    "image": "https://m.media-amazon.com/images/I/61dMkHVRKZL._AC_UL1500_.jpg",
+    "price": 2000,
+    "category": "Clothes",
+    "warrantyAvailable": true,
+    "cashOnDelivery": true,
+    "location": "Pokhara"
+  },
+  {
+    "id": 14,
+    "title": "Denim Jeans",
+    "image": "https://static-01.daraz.com.np/p/e726465da35bebaf4abbd143f7a57340.jpg",
+    "price": 2800,
+    "category": "Clothes",
+    "warrantyAvailable": false,
+    "cashOnDelivery": true,
+    "location": "Chitwan"
+  },
+  {
+    "id": 15,
+    "title": "Leather Jacket",
+    "image": "https://camokazi.co.uk/cdn/shop/articles/0D209844-96D1-4F2F-A07B-61E0C1DBB799.jpg?crop=center&height=1200&v=1652173214&width=1200",
+    "price": 5500,
+    "category": "Clothes",
+    "warrantyAvailable": true,
+    "cashOnDelivery": false,
+    "location": "Bhaktapur"
+  },
+  {
+    "id": 16,
+    "title": "Winter Gloves",
+    "image": "https://images-cdn.ubuy.co.in/659f803e99e3de670056c458-men-s-thinsulate-thick-water-resistant.jpg",
+    "price": 1500,
+    "category": "Clothes",
+    "warrantyAvailable": true,
+    "cashOnDelivery": true,
+    "location": "Kathmandu"
+  },
+  {
+    "id": 17,
+    "title": "Sports Cap",
+    "image": "https://img.drz.lazcdn.com/static/np/p/ada1fe992f579beab6792fd62a2b8047.jpg_960x960q80.jpg_.webp",
+    "price": 1200,
+    "category": "Clothes",
+    "warrantyAvailable": false,
+    "cashOnDelivery": true,
+    "location": "Pokhara"
+  },
+  {
+    "id": 18,
+    "title": "Classic Wristwatch",
+    "image": "https://m.media-amazon.com/images/I/61Aq82sC2XL._AC_UY1000_.jpg",
+    "price": 5000,
+    "category": "Clothes",
+    "warrantyAvailable": true,
+    "cashOnDelivery": false,
+    "location": "Lalitpur"
+  },
+  {
+    "id": 19,
+    "title": "Scientific Calculator",
+    "image": "https://m.media-amazon.com/images/I/514p1fUXn8L._AC_SL1000_.jpg",
+    "price": 2500,
+    "category": "Study Products",
+    "warrantyAvailable": true,
+    "cashOnDelivery": true,
+    "location": "Chitwan"
+  },
+  {
+    "id": 20,
+    "title": "Notebook Set",
+    "image": "https://img.drz.lazcdn.com/static/np/p/596703f60037bb4cf627afbebf9a1a8c.jpg_720x720q80.jpg",
+    "price": 1200,
+    "category": "Study Products",
+    "warrantyAvailable": false,
+    "cashOnDelivery": true,
+    "location": "Kathmandu"
+  },
+  {
+    "id": 21,
+    "title": "Ergonomic Study Chair",
+    "image": "https://m.media-amazon.com/images/I/71h1cLoWmSL._AC_UF894,1000_QL80_.jpg",
+    "price": 7000,
+    "category": "Study Products",
+    "warrantyAvailable": true,
+    "cashOnDelivery": false,
+    "location": "Pokhara"
+  },
+  {
+    "id": 22,
+    "title": "Adjustable Study Desk",
+    "image": "https://static-01.daraz.com.np/p/62867aea4bcae2d06304d4ca155a480e.jpg",
+    "price": 15000,
+    "category": "Study Products",
+    "warrantyAvailable": true,
+    "cashOnDelivery": true,
+    "location": "Lalitpur"
+  },
+  {
+    "id": 23,
+    "title": "Backpack for Students",
+    "image": "https://images-cdn.ubuy.co.in/64af8f8d0d0024473d1062d4-vecave-school-backpack-black-waterproof.jpg",
+    "price": 4500,
+    "category": "Study Products",
+    "warrantyAvailable": false,
+    "cashOnDelivery": true,
+    "location": "Bhaktapur"
+  },
+  {
+    "id": 24,
+    "title": "LED Study Lamp",
+    "image": "https://m.media-amazon.com/images/I/61LqZYRmACS._AC_SL1500_.jpg",
+    "price": 3000,
+    "category": "Study Products",
+    "warrantyAvailable": true,
+    "cashOnDelivery": false,
+    "location": "Kathmandu"
+  }
+]

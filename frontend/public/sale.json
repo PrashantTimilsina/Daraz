@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "Electric Hair Trimmer",
+    "image": "https://images-cdn.ubuy.ae/6522ba7b30a7a879d31c8a87-hair-clippers-for-men-professional-hair.jpg",
+    "price": 1499,
+    "discountPercentage": 67,
+    "cashOnDelivery": true,
+    "warrantyAvailable": true,
+    "location": "New York, USA"
+  },
+  {
+    "id": 2,
+    "title": "Smartwatch",
+    "image": "https://m.media-amazon.com/images/I/613vdOoh4oL._AC_SL1500_.jpg",
+    "price": 1500,
+    "discountPercentage": 77,
+    "cashOnDelivery": false,
+    "warrantyAvailable": true,
+    "location": "Los Angeles, USA"
+  },
+  {
+    "id": 3,
+    "title": "Gaming Mouse",
+    "image": "https://m.media-amazon.com/images/I/61wQNtMZHgL._AC_SL1500_.jpg",
+    "price": 2000,
+    "discountPercentage": 25,
+    "cashOnDelivery": true,
+    "warrantyAvailable": false,
+    "location": "Chicago, USA"
+  },
+  {
+    "id": 4,
+    "title": "Bluetooth Speaker",
+    "image": "https://m.media-amazon.com/images/I/71hvGkBMFNL._AC_SL1500_.jpg",
+    "price": 700,
+    "discountPercentage": 15,
+    "cashOnDelivery": true,
+    "warrantyAvailable": true,
+    "location": "Houston, USA"
+  },
+  {
+    "id": 5,
+    "title": "Mechanical Keyboard",
+    "image": "https://m.media-amazon.com/images/I/71fRP7KY9hL._AC_SL1500_.jpg",
+    "price": 4000,
+    "discountPercentage": 30,
+    "cashOnDelivery": false,
+    "warrantyAvailable": true,
+    "location": "San Francisco, USA"
+  },
+  {
+    "id": 6,
+    "title": "4K Monitor",
+    "image": "https://cdn.thewirecutter.com/wp-content/media/2023/06/4kmonitors-2048px-9794.jpg",
+    "price": 6000,
+    "discountPercentage": 25,
+    "cashOnDelivery": true,
+    "warrantyAvailable": false,
+    "location": "Seattle, USA"
+  }
+]
