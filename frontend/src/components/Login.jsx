@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import Signup from "./Signup";
 import axios from "axios";
 import { useData } from "../context/Context";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 function Login() {
   axios.defaults.withCredentials = true;
   const { setUserData, setIsLoggedIn } = useData();
@@ -12,27 +14,40 @@ function Login() {
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
-    const fields = Object.keys(data);
-    const res = await axios.post("http://localhost:8000/user/login", data);
+    const res = await axios.post("http://localhost:8000/user/login", data, {
+      withCredentials: true,
+    });
     const detail = res.data;
     setUserData(detail);
     if (res.status === 200) {
       // localStorage.setItem("token", JSON.stringify(detail?.token || ""));
       localStorage.setItem("name", JSON.stringify(detail?.name || ""));
       console.log(detail);
-      const token = document.cookie
-        .split(";")
-        .find((cookie) => cookie.trim().startsWith("token="));
-      if (token) setIsLoggedIn(true);
+
+      if (detail.token) setIsLoggedIn(true);
+      toast.success("Login successful", { autoClose: 1500 });
     } else {
       setIsLoggedIn(false);
     }
 
-    if (errors[fields]) return;
+    if (errors.email || errors.password) {
+      return;
+    }
     document.getElementById("my_modal_3").close();
     console.log(data);
     reset();
   };
+  useEffect(() => {
+    async function checkAuth() {
+      const res = await axios.get("http://localhost:8000/user/checkauth", {
+        withCredentials: true,
+      });
+      const data = await res.data;
+      if (data.cookies) setIsLoggedIn(true);
+    }
+    checkAuth();
+  }, []);
+
   return (
     <>
       <div className="container mx-auto max-w-screen-2xl text-black">

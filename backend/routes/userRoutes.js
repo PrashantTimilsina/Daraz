@@ -10,4 +10,6 @@ router.post(
 
   authController.login
 );
+router.use("/checkauth", authController.checkAuth);
+router.post("/logout", authController.logout);
 module.exports = router;

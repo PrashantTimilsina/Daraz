@@ -53,7 +53,10 @@ exports.login = async (req, res, next) => {
   }
 
   const token = signToken(user._id);
-  res.cookie("token", token, { httpOnly: true, maxAge: 1000 * 60 * 60 * 1000 });
+  res.cookie("token", token, {
+    httpOnly: true,
+    expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), //30 days from login
+  });
   return res.status(200).json({
     status: "success",
     token,
@@ -61,7 +64,7 @@ exports.login = async (req, res, next) => {
   });
 };
 exports.ensureAuthenticated = async (req, res, next) => {
-  // const auth = req.headers["authorization"];
+  // const token = req.headers["authorization"];
   const token = req.cookies.token;
   if (!token) {
     return res.status(401).json({
@@ -78,5 +81,26 @@ exports.ensureAuthenticated = async (req, res, next) => {
       status: "fail",
       message: "Error occured in verification of token",
     });
+  }
+};
+exports.checkAuth = async (req, res, next) => {
+  const cookies = req.cookies.token;
+  if (cookies) {
+    return res.status(200).json({ status: "success", cookies });
+  } else {
+    return res.status(400).json({ message: "Not logged in" });
+  }
+};
+exports.logout = async (req, res, next) => {
+  try {
+    res.clearCookie("token", {
+      httpOnly: true,
+    });
+    return res.status(200).json({
+      status: "success",
+      message: "Logout successfully",
+    });
+  } catch (err) {
+    return res.status(400).json(err.message);
   }
 };

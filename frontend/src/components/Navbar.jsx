@@ -9,11 +9,13 @@ import Login from "./Login";
 import Signup from "./Signup";
 import { useNavigate } from "react-router-dom";
 import { useData } from "../context/Context";
+import axios from "axios";
 function Navbar() {
   const [show, setShow] = useState(false);
-  const { text, setText, isLoggedIn } = useData();
+  const { text, setText, isLoggedIn, setIsLoggedIn } = useData();
   const navigate = useNavigate();
   // const token = JSON.parse(localStorage.getItem("token"));
+  // const isLoggedIn = JSON.parse(localStorage.getItem("loggedIn"));
 
   const getName = JSON.parse(localStorage.getItem("name"));
   function handleNav() {
@@ -22,9 +24,18 @@ function Navbar() {
   function handleSearch() {
     navigate("/search");
   }
-  const removeCookie = (name) => {
-    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-  };
+  async function logout() {
+    const res = await axios.post("http://localhost:8000/user/logout", {
+      withCredentials: true,
+    });
+    // const data = await res.data;
+    setTimeout(() => {
+      setIsLoggedIn(false);
+
+      handleNav();
+    }, 2000);
+  }
+
   return (
     <>
       <div className="container fixed top-0 z-50 mx-auto flex h-24 max-w-screen-2xl items-center justify-between bg-[#F85506] p-2 px-5 text-white">
@@ -91,17 +102,7 @@ function Navbar() {
             {isLoggedIn ? (
               <div className="flex w-28 items-center justify-center rounded-xl bg-orange-400 px-2 py-1">
                 <LuLogIn />
-                <h2
-                  onClick={() => {
-                    setTimeout(() => {
-                      // localStorage.removeItem("token");
-                      removeCookie("jwt");
-                      handleNav();
-                    }, 2000);
-                  }}
-                >
-                  Logout
-                </h2>
+                <h2 onClick={logout}>Logout</h2>
               </div>
             ) : (
               <>

@@ -3,6 +3,7 @@ const Product = require("../model/productModel");
 exports.getProduct = async (req, res) => {
   try {
     const product = await Product.find();
+    // res.cookie("prashant", "timilsina");
     res.status(200).json({
       status: "success",
       data: {
