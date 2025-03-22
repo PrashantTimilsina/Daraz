@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 
 import axios from "axios";
 import { useData } from "../context/Context";
+import { toast } from "react-toastify";
 function Signup() {
   const { setUserData, setIsLoggedIn } = useData();
 
@@ -36,12 +37,12 @@ function Signup() {
       if (error.response) {
         const errorData = error.response.data;
         if (errorData.error) {
-          alert(errorData.error.join("\n"));
+          toast.error(errorData.error[0]);
         } else {
-          alert(errorData.message || "Something went wrong!");
+          toast.error(errorData.message || "Something went wrong!");
         }
       } else {
-        alert("Network error. Please try again.");
+        toast.error("Network error. Please try again.");
       }
     }
   };

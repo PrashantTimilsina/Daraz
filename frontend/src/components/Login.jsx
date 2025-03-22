@@ -14,31 +14,37 @@ function Login() {
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
-    const res = await axios.post("http://localhost:8000/user/login", data, {
-      withCredentials: true,
-    });
-    const detail = res.data;
+    try {
+      const res = await axios.post("http://localhost:8000/user/login", data, {
+        withCredentials: true,
+      });
 
-    setUserData(detail);
-    if (res.status === 200) {
-      localStorage.setItem("name", JSON.stringify(detail?.name || ""));
-      console.log(detail);
+      const detail = res.data;
+      setUserData(detail);
 
-      if (detail?.token) setIsLoggedIn(true);
+      if (res.status === 200) {
+        localStorage.setItem("name", JSON.stringify(detail?.name || ""));
+        if (detail?.token) setIsLoggedIn(true);
+        document.getElementById("my_modal_3").close();
 
-      toast.success("Login successful", { autoClose: 1500 });
-    } else {
+        toast.success("Login successful", { autoClose: 1500 });
+        reset();
+      }
+    } catch (error) {
+      console.error("Login Error:", error);
+
+      // Extract and display error message
+      const errorMessage =
+        error.response?.data?.message || "Something went wrong!";
+      toast.error(errorMessage, { autoClose: 1500 });
       setIsLoggedIn(false);
-      toast.error("hi");
     }
 
     if (errors.email || errors.password) {
       return;
     }
-    document.getElementById("my_modal_3").close();
-    console.log(data);
-    reset();
   };
+
   useEffect(() => {
     async function checkAuth() {
       const res = await axios.get("http://localhost:8000/user/checkauth", {
