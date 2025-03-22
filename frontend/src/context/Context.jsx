@@ -17,7 +17,7 @@ function UserProvider({ children }) {
     async function saleData() {
       try {
         const res = await axios.get("http://localhost:8000/sale");
-        // const data = await res.json();
+
         setSaleData(res?.data?.data?.saleProducts);
       } catch (error) {
         console.log(error);

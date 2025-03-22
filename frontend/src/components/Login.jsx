@@ -18,20 +18,18 @@ function Login() {
       withCredentials: true,
     });
     const detail = res.data;
+
     setUserData(detail);
     if (res.status === 200) {
-      // localStorage.setItem("token", JSON.stringify(detail?.token || ""));
       localStorage.setItem("name", JSON.stringify(detail?.name || ""));
       console.log(detail);
 
       if (detail?.token) setIsLoggedIn(true);
+
       toast.success("Login successful", { autoClose: 1500 });
     } else {
       setIsLoggedIn(false);
-    }
-    if (data?.password !== detail?.password) {
-      toast.error("hello error");
-      return;
+      toast.error("hi");
     }
 
     if (errors.email || errors.password) {

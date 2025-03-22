@@ -3,9 +3,8 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useData } from "../context/Context";
 function Signup() {
-  const { setUserData } = useData();
-  const token = JSON.parse(localStorage.getItem("token"));
-  console.log(token);
+  const { setUserData, setIsLoggedIn } = useData();
+
   const {
     register,
     handleSubmit,
@@ -21,14 +20,14 @@ function Signup() {
 
       if (res.status === 200) {
         setTimeout(() => {
-          localStorage.setItem("token", JSON.stringify(detail?.token));
+          setIsLoggedIn(true);
+
           localStorage.setItem(
             "name",
             JSON.stringify(detail?.user?.name || "")
           );
           document.getElementById("my_modal_4").close();
           reset();
-          window.location.reload();
         }, 1500);
       }
     } catch (error) {

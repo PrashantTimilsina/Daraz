@@ -27,7 +27,7 @@ function Description() {
   const discountPercentage = location?.state?.discount;
 
   function handleAddToCart() {
-    console.log(image, title);
+    // console.log(image, title);
     const alreadyPresent = addedMovies.some((item) => item.title === title);
     if (alreadyPresent) {
       toast.error("Item is already present in cart", { autoClose: 1500 });
@@ -50,7 +50,7 @@ function Description() {
   useEffect(() => {
     setQuantity(quantity);
   }, [quantity]);
-  console.log(addedMovies);
+  // console.log(addedMovies);
 
   function handleAdd() {
     if (quantity <= 9) setQuantity((quantity) => quantity + 1);
@@ -68,10 +68,10 @@ function Description() {
           `http://localhost:8000/${category}/${fetchId}`
         );
         if (category === "sale") {
-          console.log(res?.data?.data?.sale);
+          // console.log(res?.data?.data?.sale);
           setDescription(res?.data?.data?.sale);
         } else {
-          console.log(res?.data?.data?.product[0]);
+          // console.log(res?.data?.data?.product[0]);
           setDescription(res?.data?.data?.product[0]);
         }
       } catch (error) {

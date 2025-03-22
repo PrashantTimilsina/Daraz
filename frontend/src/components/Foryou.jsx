@@ -4,7 +4,7 @@ import Card from "./Card";
 function Foryou() {
   const { productData } = useData();
 
-  console.log(productData);
+  // console.log(productData);
 
   return (
     <>
