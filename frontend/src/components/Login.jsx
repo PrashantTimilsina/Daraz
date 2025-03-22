@@ -24,10 +24,14 @@ function Login() {
       localStorage.setItem("name", JSON.stringify(detail?.name || ""));
       console.log(detail);
 
-      if (detail.token) setIsLoggedIn(true);
+      if (detail?.token) setIsLoggedIn(true);
       toast.success("Login successful", { autoClose: 1500 });
     } else {
       setIsLoggedIn(false);
+    }
+    if (data?.password !== detail?.password) {
+      toast.error("hello error");
+      return;
     }
 
     if (errors.email || errors.password) {
