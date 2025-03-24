@@ -10,6 +10,7 @@ import Signup from "./Signup";
 import { useNavigate } from "react-router-dom";
 import { useData } from "../context/Context";
 import axios from "axios";
+import { toast } from "react-toastify";
 function Navbar() {
   const [show, setShow] = useState(false);
   const { text, setText, isLoggedIn, setIsLoggedIn } = useData();
@@ -34,6 +35,17 @@ function Navbar() {
 
       handleNav();
     }, 2000);
+  }
+  function handleCart() {
+    if (isLoggedIn) {
+      navigate("/cart");
+    } else {
+      toast.error("Please login to access the cart section", {
+        autoClose: 1500,
+      });
+      navigate("/");
+    }
+    handleNav();
   }
 
   return (
@@ -88,10 +100,7 @@ function Navbar() {
           </div>
           <div
             className="flex items-center gap-2 hover:border-b-2 hover:pb-1"
-            onClick={() => {
-              navigate("/cart");
-              handleNav();
-            }}
+            onClick={handleCart}
           >
             <CiShoppingCart className="text-3xl font-bold" />
             <h1>CART</h1>

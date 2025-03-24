@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 import CategoryCard from "./components/CategoryCard";
 import { useData } from "./context/Context";
 import SearchCard from "./components/searchCard";
+import Modal from "./components/Modal";
 
 function App() {
   const { filterData } = useData();
@@ -22,6 +23,7 @@ function App() {
             element={<CategoryCard filterData={filterData} />}
           />
           <Route path="/search" element={<SearchCard />} />
+          <Route path="/modal" element={<Modal />} />
         </Route>
       </Routes>
       <ToastContainer />

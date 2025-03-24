@@ -9,6 +9,7 @@ import { useLocation, useParams } from "react-router-dom";
 import { MdEventAvailable } from "react-icons/md";
 import { useData } from "../context/Context";
 import { toast } from "react-toastify";
+import Modal from "./Modal";
 
 function Description() {
   const [description, setDescription] = useState([]);
@@ -21,7 +22,14 @@ function Description() {
   const title = description?.title;
   const price = description?.price;
 
-  const { id, setAddedMovies, addedMovies } = useData();
+  const {
+    id,
+    setAddedMovies,
+    addedMovies,
+    isLoggedIn,
+    isVisible,
+    setIsVisible,
+  } = useData();
   const { id: paramId } = useParams();
   const fetchId = paramId || id;
   const discountPercentage = location?.state?.discount;
@@ -59,6 +67,18 @@ function Description() {
   function handleMinus() {
     if (quantity > 1) setQuantity((quantity) => quantity - 1);
     return;
+  }
+  function handleBuy() {
+    if (isLoggedIn) {
+      setIsVisible(true);
+    } else {
+      toast.error("Please login to buy this item", { autoClose: 1500 });
+    }
+    // if (isLoggedIn) {
+    //   toast.success("Item will be delivered within 24hr", { autoClose: 2000 });
+    // } else {
+    //   toast.error("Please login to buy this item", { autoClose: 1500 });
+    // }
   }
   useEffect(() => {
     async function fetchDescription() {
@@ -177,8 +197,12 @@ function Description() {
               </button>
             </div>
           </div>
+          {isVisible && <Modal />}
           <div className="mt-7 space-x-2">
-            <button className="rounded-sm bg-[#26ABD4] px-5 py-2 text-xl text-white sm:w-48">
+            <button
+              className="rounded-sm bg-[#26ABD4] px-5 py-2 text-xl text-white sm:w-48"
+              onClick={handleBuy}
+            >
               Buy Now
             </button>
             <button

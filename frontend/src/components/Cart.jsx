@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useData } from "../context/Context";
 
 function Cart() {
-  const { addedMovies, setAddedMovies } = useData();
+  const { addedMovies, setAddedMovies, isLoggedIn } = useData();
   function handleRemoveFromCart(item) {
     const filter = addedMovies.filter((movies) => movies.title !== item);
     setAddedMovies(filter);
@@ -63,6 +63,7 @@ function Cart() {
           </div>
         ))}
       </div>
+      }
     </>
   );
 }

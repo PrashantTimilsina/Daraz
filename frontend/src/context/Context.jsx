@@ -12,6 +12,7 @@ function UserProvider({ children }) {
   const [text, setText] = useState("");
   const [userData, setUserData] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     async function saleData() {
@@ -58,6 +59,8 @@ function UserProvider({ children }) {
         setUserData,
         isLoggedIn,
         setIsLoggedIn,
+        isVisible,
+        setIsVisible,
       }}
     >
       {children}
