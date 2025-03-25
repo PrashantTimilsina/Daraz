@@ -5,8 +5,7 @@ import { useData } from "../context/Context";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 function Login() {
-  axios.defaults.withCredentials = true;
-  const { setUserData, setIsLoggedIn } = useData();
+  const { setUserData, setIsLoggedIn, setButtonText, buttonText } = useData();
   const {
     register,
     reset,
@@ -15,6 +14,7 @@ function Login() {
   } = useForm();
   const onSubmit = async (data) => {
     try {
+      setButtonText(true);
       const res = await axios.post("http://localhost:8000/user/login", data, {
         withCredentials: true,
       });
@@ -25,6 +25,7 @@ function Login() {
       if (res.status === 200) {
         localStorage.setItem("name", JSON.stringify(detail?.name || ""));
         if (detail?.token) setIsLoggedIn(true);
+
         document.getElementById("my_modal_3").close();
 
         toast.success("Login successful", { autoClose: 1500 });
@@ -38,6 +39,8 @@ function Login() {
         error.response?.data?.message || "Something went wrong!";
       toast.error(errorMessage, { autoClose: 1500 });
       setIsLoggedIn(false);
+    } finally {
+      setButtonText(false);
     }
 
     if (errors.email || errors.password) {
@@ -102,7 +105,7 @@ function Login() {
                   )}
                 </div>
                 <button className="w-1/2 rounded-md bg-[#F85506] px-3 py-2 text-white">
-                  Login
+                  {buttonText ? "Loading..." : "Login"}
                 </button>
               </div>
             </form>

@@ -13,7 +13,14 @@ import axios from "axios";
 import { toast } from "react-toastify";
 function Navbar() {
   const [show, setShow] = useState(false);
-  const { text, setText, isLoggedIn, setIsLoggedIn } = useData();
+  const {
+    text,
+    setText,
+    isLoggedIn,
+    setIsLoggedIn,
+    buttonText,
+    setButtonText,
+  } = useData();
   const navigate = useNavigate();
   // const token = JSON.parse(localStorage.getItem("token"));
   // const isLoggedIn = JSON.parse(localStorage.getItem("loggedIn"));
@@ -26,15 +33,17 @@ function Navbar() {
     navigate("/search");
   }
   async function logout() {
+    setButtonText(true);
     const res = await axios.post("http://localhost:8000/user/logout", {
       withCredentials: true,
     });
     // const data = await res.data;
     setTimeout(() => {
       setIsLoggedIn(false);
+      setButtonText(false);
 
       handleNav();
-    }, 2000);
+    }, 1500);
   }
   function handleCart() {
     if (isLoggedIn) {
@@ -111,7 +120,7 @@ function Navbar() {
             {isLoggedIn ? (
               <div className="flex w-28 items-center justify-center rounded-xl bg-orange-400 px-2 py-1">
                 <LuLogIn />
-                <h2 onClick={logout}>Logout</h2>
+                <h2 onClick={logout}>{buttonText ? "⌛" : "Logout"}</h2>
               </div>
             ) : (
               <>

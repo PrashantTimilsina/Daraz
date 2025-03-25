@@ -4,7 +4,7 @@ import axios from "axios";
 import { useData } from "../context/Context";
 import { toast } from "react-toastify";
 function Signup() {
-  const { setUserData, setIsLoggedIn } = useData();
+  const { setUserData, setIsLoggedIn, setButtonText, buttonText } = useData();
 
   const {
     register,
@@ -14,22 +14,18 @@ function Signup() {
   } = useForm();
   const onSubmit = async (data) => {
     try {
+      setButtonText(true);
       const res = await axios.post("http://localhost:8000/user/signup", data);
       const detail = res.data;
       console.log("API Response:", detail);
       setUserData(detail);
 
       if (res.status === 200) {
-        setTimeout(() => {
-          setIsLoggedIn(true);
+        setIsLoggedIn(true);
 
-          localStorage.setItem(
-            "name",
-            JSON.stringify(detail?.user?.name || "")
-          );
-          document.getElementById("my_modal_4").close();
-          reset();
-        }, 1500);
+        localStorage.setItem("name", JSON.stringify(detail?.user?.name || ""));
+        document.getElementById("my_modal_4").close();
+        reset();
       }
     } catch (error) {
       console.error("Signup error:", error.response?.data || error);
@@ -44,6 +40,8 @@ function Signup() {
       } else {
         toast.error("Network error. Please try again.");
       }
+    } finally {
+      setButtonText(false);
     }
   };
 
@@ -123,7 +121,7 @@ function Signup() {
                   )}
                 </div>
                 <button className="w-1/2 rounded-md bg-[#F85506] px-3 py-2 text-white">
-                  Sign Up
+                  {buttonText ? "⌛" : "Sign Up"}
                 </button>
               </div>
             </form>
