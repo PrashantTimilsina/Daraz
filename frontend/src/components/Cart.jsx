@@ -63,7 +63,6 @@ function Cart() {
           </div>
         ))}
       </div>
-      }
     </>
   );
 }

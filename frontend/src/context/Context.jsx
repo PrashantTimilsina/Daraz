@@ -13,13 +13,16 @@ function UserProvider({ children }) {
   const [userData, setUserData] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     async function saleData() {
       try {
+        setIsLoading(true);
         const res = await axios.get("http://localhost:8000/sale");
 
         setSaleData(res?.data?.data?.saleProducts);
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -29,8 +32,10 @@ function UserProvider({ children }) {
   useEffect(() => {
     async function getProduct() {
       try {
+        setIsLoading(true);
         const res = await axios.get("http://localhost:8000/product");
         setProductData(res?.data?.data?.product);
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -61,6 +66,8 @@ function UserProvider({ children }) {
         setIsLoggedIn,
         isVisible,
         setIsVisible,
+        isLoading,
+        setIsLoading,
       }}
     >
       {children}
