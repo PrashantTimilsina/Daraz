@@ -3,8 +3,10 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useData } from "../context/Context";
 import { toast } from "react-toastify";
+import { useLocal } from "../context/LocalContext";
 function Signup() {
-  const { setUserData, setIsLoggedIn, setButtonText, buttonText } = useData();
+  const { setUserData, setIsLoggedIn } = useData();
+  const { setButtonText, buttonText } = useLocal();
 
   const {
     register,
@@ -22,6 +24,7 @@ function Signup() {
 
       if (res.status === 200) {
         setIsLoggedIn(true);
+        toast.success("Signup successful", { autoClose: 1500 });
 
         localStorage.setItem("name", JSON.stringify(detail?.user?.name || ""));
         document.getElementById("my_modal_4").close();

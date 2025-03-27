@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 function CategoryCard({ filterData }) {
-  //   const { filterData } = useData();
   const navigate = useNavigate();
   useEffect(() => {
     window.scroll(0, 0);

@@ -11,6 +11,7 @@ import { useData } from "../context/Context";
 import { toast } from "react-toastify";
 import Modal from "./Modal";
 import Loader from "./Loader";
+import { useLocal } from "../context/LocalContext";
 
 function Description() {
   const [description, setDescription] = useState([]);
@@ -28,11 +29,11 @@ function Description() {
     setAddedMovies,
     addedMovies,
     isLoggedIn,
-    isVisible,
-    setIsVisible,
+
     setIsLoading,
     isLoading,
   } = useData();
+  const { isVisible, setIsVisible } = useLocal();
   const { id: paramId } = useParams();
   const fetchId = paramId || id;
   const discountPercentage = location?.state?.discount;

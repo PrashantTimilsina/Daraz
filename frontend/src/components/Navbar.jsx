@@ -11,16 +11,12 @@ import { useNavigate } from "react-router-dom";
 import { useData } from "../context/Context";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useLocal } from "../context/LocalContext";
 function Navbar() {
   const [show, setShow] = useState(false);
-  const {
-    text,
-    setText,
-    isLoggedIn,
-    setIsLoggedIn,
-    buttonText,
-    setButtonText,
-  } = useData();
+
+  const { isLoggedIn, setIsLoggedIn } = useData();
+  const { buttonText, setButtonText, text, setText } = useLocal();
   const navigate = useNavigate();
   // const token = JSON.parse(localStorage.getItem("token"));
   // const isLoggedIn = JSON.parse(localStorage.getItem("loggedIn"));
@@ -41,6 +37,7 @@ function Navbar() {
     setTimeout(() => {
       setIsLoggedIn(false);
       setButtonText(false);
+      navigate("/");
 
       handleNav();
     }, 1500);
@@ -55,6 +52,11 @@ function Navbar() {
       navigate("/");
     }
     handleNav();
+  }
+  function handleKeyPress(e) {
+    if (e.code === "Enter") {
+      handleSearch();
+    }
   }
 
   return (
@@ -77,9 +79,9 @@ function Navbar() {
             placeholder="Search in Daraz"
             className="rounded-sm border-none text-black outline-none md:h-10 md:w-72 md:p-2 lg:w-96"
             spellCheck="false"
-            autoFocus
             value={text}
             onChange={(e) => setText(e.target.value)}
+            onKeyDown={handleKeyPress}
           />
           <IoSearch
             className="z-50 h-auto w-auto cursor-pointer bg-[#FFE1D2] p-2 text-xs text-[#FCB08B] md:h-10"
@@ -142,12 +144,17 @@ function Navbar() {
           <div className="flex items-center gap-2 hover:border-b-2 hover:pb-1">
             {isLoggedIn ? (
               <>
-                <img
-                  src="https://img.freepik.com/premium-vector/avatar-profile-icon-flat-style-male-user-profile-vector-illustration-isolated-background-man-profile-sign-business-concept_157943-38764.jpg?semt=ais_hybrid"
-                  alt="profile pic"
-                  className="h-6 w-6 rounded-full"
-                />
-                <p>{getName}</p>
+                <div
+                  className="flex items-center justify-center gap-2"
+                  onClick={() => navigate("/profile")}
+                >
+                  <img
+                    src="https://img.freepik.com/premium-vector/avatar-profile-icon-flat-style-male-user-profile-vector-illustration-isolated-background-man-profile-sign-business-concept_157943-38764.jpg?semt=ais_hybrid"
+                    alt="profile pic"
+                    className="h-6 w-6 rounded-full"
+                  />
+                  <p>{getName}</p>
+                </div>
               </>
             ) : (
               <>

@@ -2,9 +2,8 @@ import { useData } from "../context/Context";
 // import sale from "./../../public/sale.json";
 import Card from "./Card";
 function Sale() {
-  const { saleData } = useData();
-  const { setIsForYou } = useData();
-  // console.log(saleData);
+  const { saleData, setIsForYou } = useData();
+
   return (
     <>
       <div

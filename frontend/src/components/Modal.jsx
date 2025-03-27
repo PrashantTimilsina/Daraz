@@ -1,8 +1,10 @@
 import { IoMdClose } from "react-icons/io";
 import { useData } from "../context/Context";
 import { toast } from "react-toastify";
+import { useLocal } from "../context/LocalContext";
 function Modal() {
-  const { setIsVisible, setDelivery, delivery } = useData();
+  const { setIsVisible, setDelivery, delivery } = useLocal();
+
   function handleYes() {
     if (delivery === "") {
       toast.error("Please fill the delivery location", { autoClose: 1500 });

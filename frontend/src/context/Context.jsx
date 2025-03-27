@@ -6,16 +6,10 @@ function UserProvider({ children }) {
   const [productData, setProductData] = useState([]);
   const [id, setId] = useState(null);
   const [addedMovies, setAddedMovies] = useState([]);
-  const [quantity, setQuantity] = useState(1);
-  const [clicked, setClicked] = useState("");
   const [filterData, setFilterData] = useState([]);
-  const [text, setText] = useState("");
   const [userData, setUserData] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [delivery, setDelivery] = useState("");
-  const [buttonText, setButtonText] = useState(false);
 
   useEffect(() => {
     async function saleData() {
@@ -54,26 +48,14 @@ function UserProvider({ children }) {
         setId,
         addedMovies,
         setAddedMovies,
-        quantity,
-        setQuantity,
-        clicked,
-        setClicked,
         filterData,
         setFilterData,
-        text,
-        setText,
         userData,
         setUserData,
         isLoggedIn,
         setIsLoggedIn,
-        isVisible,
-        setIsVisible,
         isLoading,
         setIsLoading,
-        delivery,
-        setDelivery,
-        buttonText,
-        setButtonText,
       }}
     >
       {children}

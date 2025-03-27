@@ -4,8 +4,10 @@ import axios from "axios";
 import { useData } from "../context/Context";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
+import { useLocal } from "../context/LocalContext";
 function Login() {
-  const { setUserData, setIsLoggedIn, setButtonText, buttonText } = useData();
+  const { setUserData, setIsLoggedIn } = useData();
+  const { setButtonText, buttonText } = useLocal();
   const {
     register,
     reset,
@@ -23,7 +25,11 @@ function Login() {
       setUserData(detail);
 
       if (res.status === 200) {
-        localStorage.setItem("name", JSON.stringify(detail?.name || ""));
+        localStorage.setItem("name", JSON.stringify(detail?.user?.name || ""));
+        localStorage.setItem(
+          "email",
+          JSON.stringify(detail?.user?.email || "")
+        );
         if (detail?.token) setIsLoggedIn(true);
 
         document.getElementById("my_modal_3").close();

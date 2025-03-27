@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useData } from "../context/Context";
 
 function Cart() {
-  const { addedMovies, setAddedMovies, isLoggedIn } = useData();
+  const { addedMovies, setAddedMovies } = useData();
   function handleRemoveFromCart(item) {
     const filter = addedMovies.filter((movies) => movies.title !== item);
     setAddedMovies(filter);

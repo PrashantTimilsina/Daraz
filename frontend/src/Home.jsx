@@ -6,7 +6,7 @@ import Navbar from "./components/Navbar";
 import Sale from "./components/Sale";
 import Slider from "./components/Slider";
 import { useData } from "./context/Context";
-
+import Carousel from "./components/Carousel";
 function Home() {
   const { isLoading } = useData();
   return (
@@ -17,7 +17,8 @@ function Home() {
         </>
       ) : (
         <>
-          <Slider />
+          {/* <Slider /> */}
+          <Carousel />
           <Sale />
           <Categories />
           <Foryou />

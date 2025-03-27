@@ -7,11 +7,12 @@ import { ToastContainer } from "react-toastify";
 import CategoryCard from "./components/CategoryCard";
 import { useData } from "./context/Context";
 import SearchCard from "./components/searchCard";
-import Modal from "./components/Modal";
-import Loader from "./components/Loader";
-
+import Profile from "./components/Profile";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 function App() {
   const { filterData } = useData();
+
   return (
     <BrowserRouter>
       <Routes>
@@ -24,6 +25,7 @@ function App() {
             element={<CategoryCard filterData={filterData} />}
           />
           <Route path="/search" element={<SearchCard />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
       <ToastContainer />

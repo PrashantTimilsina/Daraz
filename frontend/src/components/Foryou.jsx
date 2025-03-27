@@ -4,8 +4,6 @@ import Card from "./Card";
 function Foryou() {
   const { productData } = useData();
 
-  // console.log(productData);
-
   return (
     <>
       <div className="container mx-auto mt-7 max-w-screen-2xl p-3">

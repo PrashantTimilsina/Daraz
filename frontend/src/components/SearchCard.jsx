@@ -1,8 +1,10 @@
 import { useData } from "../context/Context";
+import { useLocal } from "../context/LocalContext";
 import CategoryCard from "./CategoryCard";
 
 function SearchCard() {
-  const { text, productData } = useData();
+  const { productData } = useData();
+  const { text } = useLocal();
 
   const filteredProducts = productData.filter((item) =>
     item.title.toLowerCase().includes(text.toLowerCase())

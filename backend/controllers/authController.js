@@ -60,7 +60,8 @@ exports.login = async (req, res, next) => {
   return res.status(200).json({
     status: "success",
     token,
-    name: user.name,
+
+    user,
   });
 };
 exports.ensureAuthenticated = async (req, res, next) => {
