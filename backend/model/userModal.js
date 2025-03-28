@@ -17,7 +17,14 @@ const userSchema = new mongoose.Schema({
   },
   passwordConfirm: {
     type: String,
-    required: true,
+    validate: {
+      validator: function (val) {
+        return this.isNew || val === this.password;
+      },
+    },
+    required: function () {
+      return this.isNew;
+    },
   },
 });
 userSchema.pre("save", async function (next) {

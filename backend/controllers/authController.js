@@ -105,3 +105,43 @@ exports.logout = async (req, res, next) => {
     return res.status(400).json(err.message);
   }
 };
+exports.getProfile = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(400).json({ message: "Please login again" });
+    }
+    res.status(200).json({
+      status: "success",
+      user,
+    });
+  } catch (err) {
+    return res.status(404).json({ message: "Bad request" });
+  }
+};
+exports.changePassword = async (req, res, next) => {
+  try {
+    const { currentPassword, newPassword, confirmNewPassword } = req.body;
+    const user = await User.findById(req.user.id).select("+password");
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    if (newPassword !== confirmNewPassword) {
+      return res
+        .status(400)
+        .json({ message: "New password and confirm password do not match" });
+    }
+    const checkPass = await bcrypt.compare(currentPassword, user.password);
+    if (!checkPass) {
+      return res
+        .status(400)
+        .json({ message: "Current password doesnot match" });
+    }
+    user.password = newPassword;
+    await user.save();
+    return res.status(200).json({ message: "Password changed successfully" });
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({ message: "Bad request" });
+  }
+};

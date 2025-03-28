@@ -26,10 +26,7 @@ function Login() {
 
       if (res.status === 200) {
         localStorage.setItem("name", JSON.stringify(detail?.user?.name || ""));
-        localStorage.setItem(
-          "email",
-          JSON.stringify(detail?.user?.email || "")
-        );
+
         if (detail?.token) setIsLoggedIn(true);
 
         document.getElementById("my_modal_3").close();

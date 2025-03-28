@@ -12,4 +12,14 @@ router.post(
 );
 router.use("/checkauth", authController.checkAuth);
 router.post("/logout", authController.logout);
+router.get(
+  "/profile",
+  authController.ensureAuthenticated,
+  authController.getProfile
+);
+router.post(
+  "/changePassword",
+  authController.ensureAuthenticated,
+  authController.changePassword
+);
 module.exports = router;
