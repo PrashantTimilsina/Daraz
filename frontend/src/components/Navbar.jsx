@@ -30,9 +30,13 @@ function Navbar() {
   }
   async function logout() {
     setButtonText(true);
-    const res = await axios.post("http://localhost:8000/user/logout", {
-      withCredentials: true,
-    });
+    const res = await axios.post(
+      "http://localhost:8000/user/logout",
+      {},
+      {
+        withCredentials: true,
+      }
+    );
     // const data = await res.data;
     setTimeout(() => {
       setIsLoggedIn(false);

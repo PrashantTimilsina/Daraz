@@ -17,7 +17,9 @@ function Signup() {
   const onSubmit = async (data) => {
     try {
       setButtonText(true);
-      const res = await axios.post("http://localhost:8000/user/signup", data);
+      const res = await axios.post("http://localhost:8000/user/signup", data, {
+        withCredentials: true,
+      });
       const detail = res.data;
       console.log("API Response:", detail);
       setUserData(detail);
@@ -57,7 +59,10 @@ function Signup() {
               {/* if there is a button in form, it will close the modal */}
               <button
                 className="btn btn-circle btn-ghost btn-sm absolute right-2 top-2"
-                onClick={() => document.getElementById("my_modal_4").close()}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById("my_modal_4").close();
+                }}
               >
                 ✕
               </button>

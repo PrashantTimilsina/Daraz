@@ -1,14 +1,21 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useData } from "../context/Context";
 
 function Profile() {
   const [profileData, setProfileData] = useState([]);
   const [modal, setModal] = useState(false);
+  const navigate = useNavigate();
+  const { setIsLoggedIn, isLoggedIn } = useData();
+  console.log(isLoggedIn);
   const {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm();
   useEffect(() => {
     async function fetchProfile() {
@@ -21,6 +28,31 @@ function Profile() {
     }
     fetchProfile();
   }, []);
+  const onSubmit = async (data) => {
+    try {
+      const res = await axios.post(
+        "http://localhost:8000/user/changePassword",
+        data,
+        { withCredentials: true }
+      );
+      const detail = res.data;
+      if (res.status === 200) {
+        toast.success(detail?.message, { autoClose: 1500 });
+
+        // navigate("/");
+      }
+      console.log(detail);
+
+      setModal((modal) => !modal);
+      reset();
+      setIsLoggedIn(false);
+
+      navigate("/");
+    } catch (error) {
+      const errorMsg = error.response.data.message;
+      toast.error(errorMsg, { autoClose: 1500 });
+    }
+  };
   return (
     <>
       <div className="mt-24 p-3">
@@ -48,34 +80,62 @@ function Profile() {
           {modal ? (
             <>
               <div className="mt-5 pb-5">
-                <form className="flex flex-col items-center justify-center gap-5 space-y-1 sm:space-y-2 lg:flex-row">
-                  <h2 className="mt-4">Current Password</h2>
+                <form
+                  className="flex flex-col items-center justify-center gap-1 space-y-4 sm:gap-4 sm:space-y-1"
+                  onSubmit={handleSubmit(onSubmit)}
+                >
+                  <h2>Current Password</h2>
                   <input
                     type="text"
                     placeholder="Current password"
                     className="w-auto bg-slate-300 px-2 py-1 text-center outline-none sm:w-56 sm:p-2"
                     {...register("currentPassword", {
-                      required: "Current password is required is required",
+                      required: "Current password is required ",
                     })}
                   />
-                  <br />
+                  {/* <br /> */}
                   {errors.currentPassword && (
-                    <span className="p-1 text-red-600">
-                      This field is required
+                    <span className="text-red-600">
+                      {errors.currentPassword.message}
                     </span>
                   )}
+
                   <h2>New Password</h2>
                   <input
                     type="text"
                     placeholder="New password"
                     className="w-auto bg-slate-300 px-2 py-1 text-center outline-none sm:w-56 sm:p-2"
+                    {...register("newPassword", {
+                      required: "New password is required ",
+                    })}
                   />
+
+                  {errors.newPassword && (
+                    <span className="text-red-600">
+                      {errors.newPassword.message}
+                    </span>
+                  )}
                   <h2>Confirm new password</h2>
                   <input
                     type="text"
                     placeholder="New password"
                     className="w-auto bg-slate-300 px-2 py-1 text-center outline-none sm:w-56 sm:p-2"
+                    {...register("confirmNewPassword", {
+                      required: "Confirm new password",
+                    })}
                   />
+                  {errors.confirmNewPassword && (
+                    <span className="text-red-600">
+                      {errors.confirmNewPassword.message}
+                    </span>
+                  )}
+
+                  <button
+                    type="submit"
+                    className="bg-orange-500 px-3 py-1 text-white sm:px-4 sm:py-2"
+                  >
+                    Change password
+                  </button>
                 </form>
               </div>
             </>
@@ -83,12 +143,21 @@ function Profile() {
             ""
           )}
           <div className="mx-auto mt-3 flex flex-col gap-6 sm:flex-row sm:gap-16">
-            <button
-              className="bg-orange-500 px-3 py-1 text-white sm:px-4 sm:py-2"
-              onClick={() => setModal(!modal)}
-            >
-              Change password
-            </button>
+            {!modal ? (
+              <button
+                className="bg-orange-500 px-3 py-1 text-white sm:px-4 sm:py-2"
+                onClick={() => setModal(!modal)}
+              >
+                Change password
+              </button>
+            ) : (
+              <button
+                className="bg-orange-500 px-5 py-1 text-white sm:w-28 sm:px-4 sm:py-2"
+                onClick={() => setModal(!modal)}
+              >
+                Back
+              </button>
+            )}
             <button className="bg-orange-500 px-3 py-1 text-white sm:px-4 sm:py-2">
               Reset password
             </button>

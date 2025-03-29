@@ -10,6 +10,7 @@ import SearchCard from "./components/searchCard";
 import Profile from "./components/Profile";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import ProtectedRoutes from "./utils/ProtectedRoutes";
 function App() {
   const { filterData } = useData();
 
@@ -19,13 +20,15 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/product/:id" element={<Description />} />
-          <Route path="/cart" element={<Cart />} />
           <Route
             path="/category"
             element={<CategoryCard filterData={filterData} />}
           />
           <Route path="/search" element={<SearchCard />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/profile" element={<Profile />} />
+          </Route>
         </Route>
       </Routes>
       <ToastContainer />

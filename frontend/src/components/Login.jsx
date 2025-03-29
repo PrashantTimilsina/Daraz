@@ -53,14 +53,18 @@ function Login() {
 
   useEffect(() => {
     async function checkAuth() {
-      const res = await axios.get("http://localhost:8000/user/checkauth", {
-        withCredentials: true,
-      });
+      const res = await axios.get(
+        "http://localhost:8000/user/checkauth",
+
+        {
+          withCredentials: true,
+        }
+      );
       const data = await res.data;
       if (data.cookies) setIsLoggedIn(true);
     }
     checkAuth();
-  }, []);
+  }, [setIsLoggedIn]);
 
   return (
     <>
@@ -71,7 +75,10 @@ function Login() {
               {/* if there is a button in form, it will close the modal */}
               <button
                 className="btn btn-circle btn-ghost btn-sm absolute right-2 top-2"
-                onClick={() => document.getElementById("my_modal_3").close()}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById("my_modal_3").close();
+                }}
               >
                 ✕
               </button>

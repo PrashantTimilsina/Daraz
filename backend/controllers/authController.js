@@ -23,6 +23,10 @@ exports.signup = async (req, res, next) => {
       passwordConfirm,
     });
     const token = signToken(newUser._id);
+    res.cookie("token", token, {
+      httpOnly: true,
+      expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), //30 days from login
+    });
     res.status(200).json({
       status: "success",
       token,
@@ -94,8 +98,9 @@ exports.checkAuth = async (req, res, next) => {
 };
 exports.logout = async (req, res, next) => {
   try {
-    res.clearCookie("token", {
+    res.clearCookie("token", "", {
       httpOnly: true,
+      expires: new Date(0),
     });
     return res.status(200).json({
       status: "success",
@@ -138,6 +143,11 @@ exports.changePassword = async (req, res, next) => {
         .json({ message: "Current password doesnot match" });
     }
     user.password = newPassword;
+    res.clearCookie("token", "", {
+      httpOnly: true,
+      expires: new Date(0),
+    });
+
     await user.save();
     return res.status(200).json({ message: "Password changed successfully" });
   } catch (err) {
