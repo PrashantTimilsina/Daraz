@@ -22,4 +22,5 @@ router.post(
   authController.ensureAuthenticated,
   authController.changePassword
 );
+router.post("/forgotPassword", authController.forgotPassword);
 module.exports = router;

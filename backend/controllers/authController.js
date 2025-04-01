@@ -1,6 +1,8 @@
 const bcrypt = require("bcryptjs");
 const User = require("./../model/userModal");
 const jwt = require("jsonwebtoken");
+const crypto = require("crypto");
+const sendResetEmail = require("./../utils/mailer");
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
@@ -153,5 +155,29 @@ exports.changePassword = async (req, res, next) => {
   } catch (err) {
     console.log(err);
     return res.status(400).json({ message: "Bad request" });
+  }
+};
+exports.forgotPassword = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    // Generate reset token
+    const resetToken = crypto.randomBytes(32).toString("hex");
+
+    // Save reset token & expiration in DB
+    user.resetToken = resetToken;
+    user.tokenExpiry = Date.now() + 3600000; // 1 hour expiry
+    await user.save();
+
+    // Send reset email
+    await sendResetEmail(email, resetToken);
+
+    res.json({ message: "Password reset email sent!" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Server error" });
   }
 };
