@@ -175,9 +175,40 @@ exports.forgotPassword = async (req, res) => {
     // Send reset email
     await sendResetEmail(email, resetToken);
 
-    res.json({ message: "Password reset email sent!" });
+    res.json({ message: "Password reset email sent!", token: resetToken });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Server error" });
+  }
+};
+exports.resetPassword = async (req, res, next) => {
+  try {
+    const { newPassword, confirmNewPassword } = req.body;
+    const { token } = req.params;
+    const user = await User.findOne({
+      resetToken: token,
+      tokenExpiry: { $gt: Date.now() },
+    });
+    if (!user) {
+      return res.status(400).json({
+        message: "Token expired or invalid",
+      });
+    }
+    if (newPassword !== confirmNewPassword) {
+      return res
+        .status(400)
+        .json({ message: "New password and confirm new password donot match" });
+    }
+    user.password = newPassword;
+
+    user.resetToken = undefined;
+    user.tokenExpiry = undefined;
+
+    await user.save();
+    return res.status(200).json({ message: "Password changed successfully✅" });
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ message: "Password reset operation failed❌" });
   }
 };
