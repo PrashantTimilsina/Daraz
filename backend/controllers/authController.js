@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const User = require("./../model/userModal");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
-const sendResetEmail = require("./../utils/mailer");
+const sendEmail = require("./../utils/mailer");
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
@@ -173,7 +173,7 @@ exports.forgotPassword = async (req, res) => {
     await user.save();
 
     // Send reset email
-    await sendResetEmail(email, resetToken);
+    sendEmail(email, user.name, resetToken);
 
     res.json({ message: "Password reset email sent!", token: resetToken });
   } catch (error) {

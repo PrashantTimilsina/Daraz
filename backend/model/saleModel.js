@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const saleSchema = new mongoose.Schema({
   id: Number,
   title: String,
+
   image: String,
   price: Number,
   discountPercentage: Number,

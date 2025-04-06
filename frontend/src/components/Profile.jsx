@@ -4,10 +4,13 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useData } from "../context/Context";
+import ResetPassword from "./ResetPassword";
 
 function Profile() {
   const [profileData, setProfileData] = useState([]);
   const [modal, setModal] = useState(false);
+  const [resetPass, setResetPass] = useState(false);
+
   const navigate = useNavigate();
   const { setIsLoggedIn, isLoggedIn } = useData();
   console.log(isLoggedIn);
@@ -51,6 +54,31 @@ function Profile() {
     } catch (error) {
       const errorMsg = error.response.data.message;
       toast.error(errorMsg, { autoClose: 1500 });
+    }
+  };
+  function resetPassword(e) {
+    e.preventDefault();
+    setResetPass((reset) => !reset);
+  }
+  const onForget = async (data) => {
+    try {
+      // setResetPass((reset) => !reset);
+      const res = await axios.post(
+        "http://localhost:8000/user/forgotPassword",
+        data,
+        { withCredentials: true }
+      );
+      if (res.data) {
+        toast.success("Please check your email and reset your password", {
+          autoClose: 1500,
+        });
+        reset();
+      }
+
+      console.log(res);
+      // reset();
+    } catch (error) {
+      toast.error(error?.response?.data?.message, { autoClose: 1500 });
     }
   };
   return (
@@ -158,9 +186,33 @@ function Profile() {
                 Back
               </button>
             )}
-            <button className="bg-orange-500 px-3 py-1 text-white sm:px-4 sm:py-2">
-              Reset password
-            </button>
+
+            <form onSubmit={handleSubmit(onForget)}>
+              {resetPass ? (
+                <input
+                  type="text"
+                  placeholder="Enter your email"
+                  className="w-auto bg-slate-300 px-2 py-1 text-center outline-none sm:w-56 sm:p-2"
+                  {...register("email", {
+                    required: "Enter your email",
+                  })}
+                />
+              ) : (
+                ""
+              )}
+              {resetPass ? (
+                <button className="bg-orange-500 px-3 py-1 text-white sm:px-4 sm:py-2">
+                  Reset Password
+                </button>
+              ) : (
+                <button
+                  className="bg-orange-500 px-3 py-1 text-white sm:px-4 sm:py-2"
+                  onClick={resetPassword}
+                >
+                  Forget password
+                </button>
+              )}
+            </form>
           </div>
         </div>
       </div>

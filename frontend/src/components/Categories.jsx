@@ -4,9 +4,8 @@ import { useData } from "../context/Context";
 function Categories() {
   const { setFilterData, productData } = useData();
   const navigate = useNavigate();
-  function handleClick(e) {
-    const category = e.target.closest("div").querySelector("h2").textContent;
-    const filter = productData.filter((item) => item.category === category);
+  function handleClick(title) {
+    const filter = productData.filter((item) => item?.category === title);
     setFilterData(filter);
 
     navigate("/category");
@@ -42,7 +41,10 @@ function Categories() {
             <div
               key={item.id}
               className="cursor-pointer space-y-3 rounded-sm border-slate-200 p-3 shadow-xl duration-100 hover:scale-105 hover:border-2"
-              onClick={handleClick}
+              onClick={() => {
+                // setClickedItem(item.title);
+                handleClick(item?.title);
+              }}
             >
               <img
                 src={item.image}

@@ -6,17 +6,20 @@ import Cart from "./components/Cart";
 import { ToastContainer } from "react-toastify";
 import CategoryCard from "./components/CategoryCard";
 import { useData } from "./context/Context";
-import SearchCard from "./components/searchCard";
+import SearchCard from "./components/SearchCard";
 import Profile from "./components/Profile";
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
+import ResetPassword from "./components/ResetPassword";
 function App() {
   const { filterData } = useData();
 
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/user/reset/:token" element={<ResetPassword />} />
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/product/:id" element={<Description />} />
