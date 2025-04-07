@@ -42,7 +42,6 @@ function Categories() {
               key={item.id}
               className="cursor-pointer space-y-3 rounded-sm border-slate-200 p-3 shadow-xl duration-100 hover:scale-105 hover:border-2"
               onClick={() => {
-                // setClickedItem(item.title);
                 handleClick(item?.title);
               }}
             >

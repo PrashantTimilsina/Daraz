@@ -3,9 +3,11 @@ import { useEffect } from "react";
 
 function CategoryCard({ filterData }) {
   const navigate = useNavigate();
+
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
+
   return (
     <div className="mt-40 grid grid-cols-2 justify-around gap-y-10 p-2 px-5 md:grid-cols-3 lg:grid-cols-4">
       {filterData?.map((item) => (

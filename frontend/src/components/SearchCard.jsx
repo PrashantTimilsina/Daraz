@@ -6,9 +6,11 @@ function SearchCard() {
   const { productData } = useData();
   const { text } = useLocal();
 
-  const filteredProducts = productData.filter((item) =>
-    item.title.toLowerCase().includes(text.toLowerCase())
-  );
+  const filteredProducts = productData.filter((item) => {
+    const searchWords = text.toLowerCase().split(" ");
+    const title = item.title.toLowerCase();
+    return searchWords.every((word) => title.includes(word));
+  });
 
   console.log(filteredProducts);
 

@@ -68,7 +68,7 @@ function Navbar() {
       <div className="container fixed top-0 z-50 mx-auto flex h-24 max-w-screen-2xl items-center justify-between bg-[#F85506] p-2 px-5 text-white">
         {/*IMAGE SECTION*/}
 
-        <div className="ml-7">
+        <div className="sm:ml-7">
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaRGl23rCWQF7k4ecZDfbBkOsvDd8wseRi1w&s"
             alt="daraz logo"
@@ -88,7 +88,7 @@ function Navbar() {
             onKeyDown={handleKeyPress}
           />
           <IoSearch
-            className="z-50 h-auto w-auto cursor-pointer bg-[#FFE1D2] p-2 text-xs text-[#FCB08B] md:h-10"
+            className="z-50 h-6 w-auto cursor-pointer bg-[#FFE1D2] p-2 text-xs text-[#FCB08B] md:h-10"
             onClick={handleSearch}
           />
         </div>
@@ -150,7 +150,10 @@ function Navbar() {
               <>
                 <div
                   className="flex items-center justify-center gap-2"
-                  onClick={() => navigate("/profile")}
+                  onClick={() => {
+                    navigate("/profile");
+                    handleNav();
+                  }}
                 >
                   <img
                     src="https://img.freepik.com/premium-vector/avatar-profile-icon-flat-style-male-user-profile-vector-illustration-isolated-background-man-profile-sign-business-concept_157943-38764.jpg?semt=ais_hybrid"
@@ -178,9 +181,9 @@ function Navbar() {
         </div>
         <div className="block text-2xl sm:hidden">
           {show ? (
-            <IoIosClose onClick={handleNav} className="text-3xl" />
+            <IoIosClose onClick={handleNav} className="mr-2 text-3xl" />
           ) : (
-            <RxHamburgerMenu onClick={handleNav} />
+            <RxHamburgerMenu onClick={handleNav} className="mr-2" />
           )}
         </div>
       </div>

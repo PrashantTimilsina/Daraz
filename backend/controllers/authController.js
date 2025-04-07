@@ -203,6 +203,10 @@ exports.resetPassword = async (req, res, next) => {
 
     user.resetToken = undefined;
     user.tokenExpiry = undefined;
+    res.clearCookie("token", "", {
+      httpOnly: true,
+      expires: new Date(0),
+    });
 
     await user.save();
     return res.status(200).json({ message: "Password changed successfully✅" });
