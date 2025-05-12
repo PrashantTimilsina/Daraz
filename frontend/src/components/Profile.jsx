@@ -4,12 +4,13 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useData } from "../context/Context";
-import ResetPassword from "./ResetPassword";
 
 function Profile() {
-  const [profileData, setProfileData] = useState([]);
+  // const [profileData, setProfileData] = useState([]);
+  const { profileData, setProfileData } = useData();
   const [modal, setModal] = useState(false);
   const [resetPass, setResetPass] = useState(false);
+  const [file, setFile] = useState();
 
   const navigate = useNavigate();
   const { setIsLoggedIn, isLoggedIn } = useData();
@@ -60,6 +61,29 @@ function Profile() {
     e.preventDefault();
     setResetPass((reset) => !reset);
   }
+  function upload(file) {
+    if (!file) {
+      toast.error("Upload failed", { autoClose: 1500 });
+      return;
+    }
+    const formData = new FormData();
+    formData.append("file", file);
+
+    axios
+      .post("http://localhost:8000/user/upload", formData, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log("Upload successful:", res.data);
+        toast.success("Please refresh the page to view changes", {
+          autoClose: 1500,
+        });
+      })
+      .catch((err) => {
+        console.error("Upload failed:", err);
+      });
+  }
+
   const onForget = async (data) => {
     try {
       // setResetPass((reset) => !reset);
@@ -86,9 +110,13 @@ function Profile() {
       <div className="mt-24 p-3">
         <div>
           <img
-            src="https://img.freepik.com/premium-vector/avatar-profile-icon-flat-style-male-user-profile-vector-illustration-isolated-background-man-profile-sign-business-concept_157943-38764.jpg?semt=ais_hybrid"
+            src={
+              profileData?.user?.image
+                ? `http://localhost:8000/images/${profileData?.user?.image}`
+                : "https://img.freepik.com/premium-vector/avatar-profile-icon-flat-style-male-user-profile-vector-illustration-isolated-background-man-profile-sign-business-concept_157943-38764.jpg?semt=ais_hybrid"
+            }
             alt="profile pic"
-            className="mx-auto w-1/2 sm:w-1/6"
+            className="mx-auto aspect-square w-1/2 rounded-full object-cover sm:w-1/6"
           />
         </div>
         <div className="flex flex-col gap-1 text-center">
@@ -105,6 +133,21 @@ function Profile() {
           <h1>
             Password: <span className="font-semibold">*******</span>
           </h1>
+          <div className="flex flex-col items-center justify-center p-1 sm:my-2 sm:flex-row sm:space-x-4">
+            <p className="font-semibold">Change picture</p>
+            <input
+              type="file"
+              id="fileInput"
+              accept="image/*"
+              onChange={(e) => setFile(e.target.files[0])}
+            />
+            <label
+              className="my-3 cursor-pointer rounded bg-blue-500 px-3 py-1 text-white hover:bg-blue-600 sm:w-auto"
+              onClick={() => upload(file)}
+            >
+              Upload Image
+            </label>
+          </div>
           {modal ? (
             <>
               <div className="mt-5 pb-5">

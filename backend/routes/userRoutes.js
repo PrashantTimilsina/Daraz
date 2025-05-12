@@ -1,6 +1,7 @@
 const express = require("express");
 const authController = require("./../controllers/authController");
 const authValidator = require("./../middlewares/authValidation");
+const multer = require("multer");
 const router = express.Router();
 
 router.post("/signup", authValidator.signupValidation, authController.signup);
@@ -24,4 +25,19 @@ router.post(
 );
 router.post("/forgotPassword", authController.forgotPassword);
 router.post("/reset/:token", authController.resetPassword);
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    return cb(null, "./public/images");
+  },
+  filename: function (req, file, cb) {
+    return cb(null, `${Date.now()}_${file.originalname}`);
+  },
+});
+const upload = multer({ storage });
+router.post(
+  "/upload",
+  authController.ensureAuthenticated,
+  upload.single("file"),
+  authController.fileUpload
+);
 module.exports = router;

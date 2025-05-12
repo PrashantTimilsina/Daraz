@@ -14,6 +14,8 @@ import { toast } from "react-toastify";
 import { useLocal } from "../context/LocalContext";
 function Navbar() {
   const [show, setShow] = useState(false);
+  const { profileData } = useData();
+  console.log(profileData);
 
   const { isLoggedIn, setIsLoggedIn } = useData();
   const { buttonText, setButtonText, text, setText } = useLocal();
@@ -156,10 +158,15 @@ function Navbar() {
                   }}
                 >
                   <img
-                    src="https://img.freepik.com/premium-vector/avatar-profile-icon-flat-style-male-user-profile-vector-illustration-isolated-background-man-profile-sign-business-concept_157943-38764.jpg?semt=ais_hybrid"
+                    src={
+                      profileData?.user?.image
+                        ? `http://localhost:8000/images/${profileData?.user?.image}`
+                        : "https://img.freepik.com/premium-vector/avatar-profile-icon-flat-style-male-user-profile-vector-illustration-isolated-background-man-profile-sign-business-concept_157943-38764.jpg?semt=ais_hybrid"
+                    }
                     alt="profile pic"
-                    className="h-6 w-6 rounded-full"
+                    className="h-6 w-6 rounded-full object-cover"
                   />
+
                   <p>{getName}</p>
                 </div>
               </>

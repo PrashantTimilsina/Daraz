@@ -32,6 +32,9 @@ const userSchema = new mongoose.Schema({
   tokenExpiry: {
     type: Date,
   },
+  image: {
+    type: String,
+  },
 });
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();

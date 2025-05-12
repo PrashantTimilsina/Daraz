@@ -10,6 +10,7 @@ function UserProvider({ children }) {
   const [userData, setUserData] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [profileData, setProfileData] = useState([]);
 
   useEffect(() => {
     async function saleData() {
@@ -56,6 +57,8 @@ function UserProvider({ children }) {
         setIsLoggedIn,
         isLoading,
         setIsLoading,
+        profileData,
+        setProfileData,
       }}
     >
       {children}

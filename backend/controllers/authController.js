@@ -3,6 +3,7 @@ const User = require("./../model/userModal");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const sendEmail = require("./../utils/mailer");
+
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
@@ -215,4 +216,14 @@ exports.resetPassword = async (req, res, next) => {
       .status(400)
       .json({ message: "Password reset operation failed❌" });
   }
+};
+exports.fileUpload = async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+  user.image = req?.file?.filename;
+  console.log(user);
+  await user.save();
+  res.status(200).json({
+    status: "success",
+    user,
+  });
 };
