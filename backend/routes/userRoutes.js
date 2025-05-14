@@ -24,7 +24,10 @@ router.post(
   authController.changePassword
 );
 router.post("/forgotPassword", authController.forgotPassword);
+router.get("/search/:id", authController.search);
+router.delete("/deleteuser", authController.deleteUser);
 router.post("/reset/:token", authController.resetPassword);
+router.post("/update/:id", authController.update);
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     return cb(null, "./public/images");

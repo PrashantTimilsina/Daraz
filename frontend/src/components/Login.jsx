@@ -5,9 +5,11 @@ import { useData } from "../context/Context";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { useLocal } from "../context/LocalContext";
+import { useNavigate } from "react-router-dom";
 function Login() {
-  const { setUserData, setIsLoggedIn } = useData();
+  const { setUserData, setIsLoggedIn, admin, setAdmin } = useData();
   const { setButtonText, buttonText } = useLocal();
+  const navigate = useNavigate();
   const {
     register,
     reset,
@@ -22,9 +24,19 @@ function Login() {
       });
 
       const detail = res.data;
+      if (detail?.user?.role === "admin") {
+        setAdmin(true);
+      }
+      console.log(detail);
       setUserData(detail);
 
       if (res.status === 200) {
+        if (detail.user.role === "admin") {
+          console.log("hello");
+          document.getElementById("my_modal_3").close();
+          navigate("/admin");
+          return;
+        }
         localStorage.setItem("name", JSON.stringify(detail?.user?.name || ""));
 
         if (detail?.token) setIsLoggedIn(true);

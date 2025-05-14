@@ -4,7 +4,7 @@ import { LuLogIn } from "react-icons/lu";
 import { SiGnuprivacyguard } from "react-icons/si";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoIosClose } from "react-icons/io";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Login from "./Login";
 import Signup from "./Signup";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +14,7 @@ import { toast } from "react-toastify";
 import { useLocal } from "../context/LocalContext";
 function Navbar() {
   const [show, setShow] = useState(false);
-  const { profileData } = useData();
+  const { profileData, setProfileData } = useData();
   console.log(profileData);
 
   const { isLoggedIn, setIsLoggedIn } = useData();
@@ -64,6 +64,17 @@ function Navbar() {
       handleSearch();
     }
   }
+  useEffect(() => {
+    async function fetchProfile() {
+      const res = await axios.get("http://localhost:8000/user/profile", {
+        withCredentials: true,
+      });
+      const data = res.data;
+      console.log(data);
+      setProfileData(data);
+    }
+    fetchProfile();
+  }, []);
 
   return (
     <>

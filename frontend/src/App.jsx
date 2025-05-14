@@ -1,4 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import { io } from "socket.io-client";
+
 import Home from "./Home";
 import Description from "./components/Description";
 import Layout from "./Layout";
@@ -13,12 +15,30 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 import ResetPassword from "./components/ResetPassword";
+import Admin from "./components/Admin";
+
 function App() {
   const { filterData } = useData();
+  const { admin } = useData();
+
+  // const socket = io("http://localhost:8000");
 
   return (
     <BrowserRouter>
       <Routes>
+        <Route
+          path="/admin"
+          element={
+            admin ? (
+              <Admin />
+            ) : (
+              <p className="flex min-h-screen items-center justify-center text-3xl">
+                You cannot access this path
+              </p>
+            )
+          }
+        />
+
         <Route path="/user/reset/:token" element={<ResetPassword />} />
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />

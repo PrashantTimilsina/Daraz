@@ -3,6 +3,7 @@ const User = require("./../model/userModal");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const sendEmail = require("./../utils/mailer");
+const { default: mongoose } = require("mongoose");
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -48,6 +49,7 @@ exports.login = async (req, res, next) => {
   if (!user) {
     return res.status(400).json({
       status: "fail",
+      role: user.role,
       message: "User doesnot exists. Please signup",
     });
   }
@@ -225,5 +227,55 @@ exports.fileUpload = async (req, res, next) => {
   res.status(200).json({
     status: "success",
     user,
+  });
+};
+
+{
+  /*ADMIN PANEL*/
+}
+
+exports.search = async (req, res, next) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({
+      message: "Invalid user Id",
+    });
+  }
+
+  const user = await User.findById(id);
+  if (!user) {
+    return res.status(400).json({
+      status: "fail",
+      message: "No user found",
+    });
+  }
+  return res.status(200).json({
+    status: "success",
+    user,
+  });
+};
+exports.update = async (req, res, next) => {
+  const { id } = req.params;
+  const { newName } = req.body;
+  const user = await User.findById(id);
+  if (!user) {
+    return res.status(400).json({
+      status: "fail",
+      error: "Please try again",
+    });
+  }
+  user.name = newName;
+  await user.save();
+  res.status(200).json({
+    status: "success",
+    user,
+  });
+};
+exports.deleteUser = async (req, res, next) => {
+  const { id } = req.body;
+  const user = await User.deleteOne({ _id: id });
+
+  res.status(200).json({
+    message: "User deleted",
   });
 };

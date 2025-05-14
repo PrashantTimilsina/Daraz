@@ -119,7 +119,7 @@ function Profile() {
             className="mx-auto aspect-square w-1/2 rounded-full object-cover sm:w-1/6"
           />
         </div>
-        <div className="flex flex-col gap-1 text-center">
+        <div className="my-3 flex flex-col gap-1 text-center">
           <h1 className="flex items-center justify-center gap-2">
             Name:{" "}
             <span className="font-semibold">{profileData?.user?.name}</span>{" "}
