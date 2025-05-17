@@ -16,7 +16,7 @@ function ResetPassword() {
     try {
       if (!data) return;
       const res = await axios.post(
-        `http://localhost:8000/user/reset/${token}`,
+        `https://daraz-backend-lsuk.onrender.com/user/reset/${token}`,
         data,
         { withCredentials: true }
       );
