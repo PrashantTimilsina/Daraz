@@ -90,7 +90,7 @@ function Description() {
 
         const category = discountPercentage ? "sale" : "product";
         const res = await axios.get(
-          `http://localhost:8000/${category}/${fetchId}`
+          `https://daraz-backend-lsuk.onrender.com/${category}/${fetchId}`
         );
         if (category === "sale") {
           // console.log(res?.data?.data?.sale);
