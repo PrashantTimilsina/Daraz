@@ -33,7 +33,7 @@ function Navbar() {
   async function logout() {
     setButtonText(true);
     const res = await axios.post(
-      "http://localhost:8000/user/logout",
+      "https://daraz-backend-lsuk.onrender.com/user/logout",
       {},
       {
         withCredentials: true,
@@ -66,7 +66,7 @@ function Navbar() {
   }
   useEffect(() => {
     async function fetchProfile() {
-      const res = await axios.get("http://localhost:8000/user/profile", {
+      const res = await axios.get("https://daraz-backend-lsuk.onrender.com/user/profile", {
         withCredentials: true,
       });
       const data = res.data;
