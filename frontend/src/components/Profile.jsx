@@ -23,7 +23,7 @@ function Profile() {
   } = useForm();
   useEffect(() => {
     async function fetchProfile() {
-      const res = await axios.get("http://localhost:8000/user/profile", {
+      const res = await axios.get("https://daraz-backend-lsuk.onrender.com/user/profile", {
         withCredentials: true,
       });
       const data = res.data;
@@ -35,7 +35,7 @@ function Profile() {
   const onSubmit = async (data) => {
     try {
       const res = await axios.post(
-        "http://localhost:8000/user/changePassword",
+        "https://daraz-backend-lsuk.onrender.com/user/changePassword",
         data,
         { withCredentials: true }
       );
@@ -70,7 +70,7 @@ function Profile() {
     formData.append("file", file);
 
     axios
-      .post("http://localhost:8000/user/upload", formData, {
+      .post("https://daraz-backend-lsuk.onrender.com/user/upload", formData, {
         withCredentials: true,
       })
       .then((res) => {
@@ -88,7 +88,7 @@ function Profile() {
     try {
       // setResetPass((reset) => !reset);
       const res = await axios.post(
-        "http://localhost:8000/user/forgotPassword",
+        "https://daraz-backend-lsuk.onrender.com/user/forgotPassword",
         data,
         { withCredentials: true }
       );
