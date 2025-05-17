@@ -49,7 +49,7 @@ exports.login = async (req, res, next) => {
   if (!user) {
     return res.status(400).json({
       status: "fail",
-      role: user.role,
+      role: user?.role,
       message: "User doesnot exists. Please signup",
     });
   }

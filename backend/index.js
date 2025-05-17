@@ -5,15 +5,11 @@ const express = require("express");
 // const {Server}=require('socket.io');
 const app = express();
 const cors = require("cors");
-// const http=require('http');
-// const server=http.createServer(app);
-// const io = new Server(server, {
-//   cors: {
-//     origin: "http://localhost:5173",
-//     credentials: true,
-//   },
-// });
-
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
+const mongoSanitize = require("express-mongo-sanitize");
+const xss = require("xss-clean");
+const hpp = require("hpp");
 
 const productRouter = require("./routes/productRoutes");
 const saleRouter = require("./routes/saleRoutes");
@@ -22,6 +18,27 @@ const path = require("path");
 app.use("/images", express.static(path.join(__dirname, "public/images")));
 dotenv.config();
 // app.use(cors());
+
+//SECURITY CODE
+app.use(helmet());
+
+//rate limiter
+
+const limiter = rateLimit({
+  max: 100, // limit each IP to 100 requests
+  windowMs: 60 * 60 * 1000, // per hour
+  message: "Too many requests from this IP, please try again in an hour!",
+});
+app.use(limiter);
+app.use(express.json({ limit: "10kb" }));
+
+//prevent from no sql injection
+app.use(mongoSanitize());
+//data sanitization
+app.use(xss());
+//reject duplicate query parameter
+app.use(hpp());
+
 app.use(cookieParser());
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
@@ -38,6 +55,3 @@ mongoose.connect(DB).then(() => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-// io.on('connection', (socket) => {
-//   console.log('a user connected');
-// });
