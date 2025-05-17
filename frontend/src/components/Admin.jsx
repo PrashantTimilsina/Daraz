@@ -24,7 +24,7 @@ function Admin() {
   const onSubmit = async (data) => {
     try {
       const res = await axios.get(
-        `http://localhost:8000/user/search/${data.id}`,
+        `https://daraz-backend-lsuk.onrender.com/user/search/${data.id}`,
         {
           withCredentials: true,
         }
@@ -42,7 +42,7 @@ function Admin() {
   async function update(e) {
     e.preventDefault();
     const res = await axios.post(
-      `http://localhost:8000/user/update/${userId}`,
+      `https://daraz-backend-lsuk.onrender.com/user/update/${userId}`,
       { newName: name },
       { withCredentials: true }
     );
@@ -58,7 +58,7 @@ function Admin() {
   }
   async function deleteUser() {
     const res = await axios.delete(
-      "http://localhost:8000/user/deleteuser",
+      "https://daraz-backend-lsuk.onrender.com/user/deleteuser",
       {
         data: { id: userId },
       },
