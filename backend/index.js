@@ -40,7 +40,7 @@ app.use(xss());
 app.use(hpp());
 
 app.use(cookieParser());
-app.use(cors({ origin: "https://daraz-backend-lsuk.onrender.com", credentials: true }));
+app.use(cors({ origin: "https://daraz-frontend-jcr3.onrender.com", credentials: true }));
 
 app.use(express.json());
 app.use("/sale", saleRouter);
