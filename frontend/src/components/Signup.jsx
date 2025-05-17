@@ -17,7 +17,7 @@ function Signup() {
   const onSubmit = async (data) => {
     try {
       setButtonText(true);
-      const res = await axios.post("http://localhost:8000/user/signup", data, {
+      const res = await axios.post("https://daraz-backend-lsuk.onrender.com/user/signup", data, {
         withCredentials: true,
       });
       const detail = res.data;
