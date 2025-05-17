@@ -19,7 +19,7 @@ function Login() {
   const onSubmit = async (data) => {
     try {
       setButtonText(true);
-      const res = await axios.post("http://localhost:8000/user/login", data, {
+      const res = await axios.post("https://daraz-backend-lsuk.onrender.com/user/login", data, {
         withCredentials: true,
       });
 
@@ -66,7 +66,7 @@ function Login() {
   useEffect(() => {
     async function checkAuth() {
       const res = await axios.get(
-        "http://localhost:8000/user/checkauth",
+        "https://daraz-backend-lsuk.onrender.com/user/checkauth",
 
         {
           withCredentials: true,
