@@ -17,7 +17,7 @@ function UserProvider({ children }) {
     async function saleData() {
       try {
         setIsLoading(true);
-        const res = await axios.get("http://localhost:8000/sale");
+        const res = await axios.get("https://daraz-backend-lsuk.onrender.com/sale");
 
         setSaleData(res?.data?.data?.saleProducts);
         setIsLoading(false);
@@ -31,7 +31,7 @@ function UserProvider({ children }) {
     async function getProduct() {
       try {
         setIsLoading(true);
-        const res = await axios.get("http://localhost:8000/product");
+        const res = await axios.get("https://daraz-backend-lsuk.onrender.com/product");
         setProductData(res?.data?.data?.product);
         setIsLoading(false);
       } catch (error) {
