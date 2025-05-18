@@ -10,7 +10,7 @@ const ProtectedRoutes = () => {
   useEffect(() => {
     async function checkAuth() {
       try {
-        const res = await axios.get("http://localhost:8000/user/checkauth", {
+        const res = await axios.get("https://daraz-backend-lsuk.onrender.com/user/checkauth", {
           withCredentials: true,
         });
         if (res.data.cookies) setIsLoggedIn(true);
