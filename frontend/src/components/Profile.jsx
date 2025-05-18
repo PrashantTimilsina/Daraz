@@ -112,7 +112,7 @@ function Profile() {
           <img
             src={
               profileData?.user?.image
-                ? `http://localhost:8000/images/${profileData?.user?.image}`
+                ? `https://daraz-backend-lsuk.onrender.com/images/${profileData?.user?.image}`
                 : "https://img.freepik.com/premium-vector/avatar-profile-icon-flat-style-male-user-profile-vector-illustration-isolated-background-man-profile-sign-business-concept_157943-38764.jpg?semt=ais_hybrid"
             }
             alt="profile pic"
