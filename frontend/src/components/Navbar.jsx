@@ -24,8 +24,8 @@ function Navbar() {
   // const isLoggedIn = JSON.parse(localStorage.getItem("loggedIn"));
 
   const getName = JSON.parse(localStorage.getItem("name"));
-  function handleNav(e) {
-    e.preventDefault();
+  function handleNav() {
+    
     setShow((show) => !show);
   }
   function handleSearch() {
