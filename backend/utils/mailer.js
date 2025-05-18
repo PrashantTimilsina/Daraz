@@ -8,7 +8,7 @@ const mailjet = new Mailjet({
 });
 
 function sendEmail(toEmail, toName, resetToken) {
-  const resetURL = `http://localhost:5173/user/reset/${resetToken}`;
+  const resetURL = `https://daraz-frontend-jcr3.onrender.com/user/reset/${resetToken}`;
 
   mailjet
     .post("send", { version: "v3.1" })
