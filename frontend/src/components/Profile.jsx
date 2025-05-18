@@ -39,7 +39,7 @@ function Profile() {
         data,
         { withCredentials: true }
       );
-      const detail = res.data;
+      const detail = res?.data;
       if (res.status === 200) {
         toast.success(detail?.message, { autoClose: 1500 });
 
