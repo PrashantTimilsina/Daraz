@@ -28,9 +28,12 @@ exports.signup = async (req, res, next) => {
     });
     const token = signToken(newUser._id);
     res.cookie("token", token, {
-      httpOnly: true,
-      expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), //30 days from login
-    });
+  httpOnly: true,
+  secure: true,          // ⬅️ ensures cookie is only sent over HTTPS
+  sameSite: "None",      // ⬅️ required for cross-origin cookie usage
+  expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+});
+
     res.status(200).json({
       status: "success",
       token,
@@ -63,9 +66,12 @@ exports.login = async (req, res, next) => {
 
   const token = signToken(user._id);
   res.cookie("token", token, {
-    httpOnly: true,
-    expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), //30 days from login
-  });
+  httpOnly: true,
+  secure: true,          // ⬅️ ensures cookie is only sent over HTTPS
+  sameSite: "None",      // ⬅️ required for cross-origin cookie usage
+  expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+});
+
   return res.status(200).json({
     status: "success",
     token,
@@ -103,10 +109,11 @@ exports.checkAuth = async (req, res, next) => {
 };
 exports.logout = async (req, res, next) => {
   try {
-    res.clearCookie("token", "", {
-      httpOnly: true,
-      expires: new Date(0),
-    });
+res.clearCookie("token", {
+  httpOnly: true,
+  secure: true,
+  sameSite: "None"
+});
     return res.status(200).json({
       status: "success",
       message: "Logout successfully",
@@ -148,10 +155,11 @@ exports.changePassword = async (req, res, next) => {
         .json({ message: "Current password doesnot match" });
     }
     user.password = newPassword;
-    res.clearCookie("token", "", {
-      httpOnly: true,
-      expires: new Date(0),
-    });
+    res.clearCookie("token", {
+  httpOnly: true,
+  secure: true,
+  sameSite: "None"
+});
 
     await user.save();
     return res.status(200).json({ message: "Password changed successfully" });
@@ -206,10 +214,11 @@ exports.resetPassword = async (req, res, next) => {
 
     user.resetToken = undefined;
     user.tokenExpiry = undefined;
-    res.clearCookie("token", "", {
-      httpOnly: true,
-      expires: new Date(0),
-    });
+    res.clearCookie("token", {
+  httpOnly: true,
+  secure: true,
+  sameSite: "None"
+});
 
     await user.save();
     return res.status(200).json({ message: "Password changed successfully✅" });
