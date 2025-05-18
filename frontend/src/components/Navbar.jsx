@@ -94,14 +94,14 @@ function Navbar() {
           <input
             type="text"
             placeholder="Search in Daraz"
-            className="rounded-sm border-none text-black outline-none md:h-10 md:w-72 md:p-2 lg:w-96"
+            className="my-auto rounded-sm border-none p-1 text-black outline-none md:h-10 md:w-72 md:p-2 lg:w-96"
             spellCheck="false"
             value={text}
             onChange={(e) => setText(e.target.value)}
             onKeyDown={handleKeyPress}
           />
           <IoSearch
-            className="z-50 h-6 w-auto cursor-pointer bg-[#FFE1D2] p-2 text-xs text-[#FCB08B] md:h-10"
+           className="z-50 h-8 w-auto cursor-pointer bg-[#FFE1D2] p-2 text-xs text-[#FCB08B] md:h-10"
             onClick={handleSearch}
           />
         </div>
@@ -199,9 +199,9 @@ function Navbar() {
         </div>
         <div className="block text-2xl sm:hidden">
           {show ? (
-            <IoIosClose onClick={handleNav} className="mr-2 text-3xl" />
+            <IoIosClose onClick={handleNav} className="mx-2 text-3xl" />
           ) : (
-            <RxHamburgerMenu onClick={handleNav} className="mr-2" />
+            <RxHamburgerMenu onClick={handleNav} className="mx-2" />
           )}
         </div>
       </div>
