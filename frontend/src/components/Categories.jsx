@@ -33,7 +33,7 @@ function Categories() {
   ];
   return (
     <>
-      <div className="container mx-auto ml-6 max-w-screen-2xl p-4">
+      <div className="container mx-auto max-w-screen-2xl p-1 sm:ml-6 sm:p-4">
         <h1 className="text-center text-xl sm:text-left">Categories</h1>
         <div className="mt-2 grid w-auto items-center justify-center gap-6 p-2 text-center xs:grid-cols-2 sm:text-left md:w-full md:grid-cols-3 lg:w-1/2 lg:grid-cols-3">
           {/*CATEGORIES*/}
