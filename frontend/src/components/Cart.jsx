@@ -4,7 +4,7 @@ import { useData } from "../context/Context";
 function Cart() {
   const { addedMovies, setAddedMovies } = useData();
   function handleRemoveFromCart(item) {
-    const filter = addedMovies.filter((movies) => movies.title !== item);
+    const filter = addedMovies?.filter((movies) => movies?.title !== item);
     setAddedMovies(filter);
     localStorage.setItem("cart", JSON.stringify(filter));
   }
@@ -22,7 +22,7 @@ function Cart() {
     const discountPrice = Math.floor(
       ((100 - item?.discountPercentage) * item?.price) / 100
     );
-    const price = item?.discountPercentage ? discountPrice : item.price;
+    const price = item?.discountPercentage ? discountPrice : item?.price;
     return acc + price * item?.quantity;
   }, 0);
   return (
