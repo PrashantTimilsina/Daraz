@@ -52,7 +52,7 @@ function Signup() {
 
   return (
     <>
-      <div className="container mx-auto max-w-screen-2xl text-black bg-white">
+      <div className="container mx-auto max-w-screen-2xl text-black bg-[#FFE1D2]">
         <dialog id="my_modal_4" className="modal">
           <div className="modal-box">
             <form method="dialog" onSubmit={handleSubmit(onSubmit)}>
