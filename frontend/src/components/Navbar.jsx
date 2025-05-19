@@ -79,7 +79,7 @@ function Navbar() {
 
   return (
     <>
-      <div className="container fixed top-0 z-50 mx-auto flex h-24 max-w-screen-2xl items-center justify-between  p-2 px-5 text-white">
+      <div className="container fixed top-0 z-50 mx-auto flex h-24 max-w-screen-2xl items-center justify-between bg-[#F85506]  p-2 px-5 text-white">
         {/*IMAGE SECTION*/}
 
         <div className="sm:ml-7">
