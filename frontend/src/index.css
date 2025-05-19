@@ -5,6 +5,8 @@
 body {
   font-family: "Roboto", serif;
   overflow-x: hidden;
+  background-color: white;
+  color:black;
 }
 html {
   overflow-x: hidden;
