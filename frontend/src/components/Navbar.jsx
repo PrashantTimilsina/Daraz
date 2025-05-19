@@ -95,7 +95,7 @@ function Navbar() {
           <input
             type="text"
             placeholder="Search in Daraz"
-            className="my-auto rounded-sm border-none p-1 text-black outline-none md:h-10 md:w-72 md:p-2 lg:w-96"
+            className="my-auto rounded-sm border-none p-1 text-black outline-none md:h-10 md:w-72 md:p-2 lg:w-96 bg-[#FFE1D2]"
             spellCheck="false"
             value={text}
             onChange={(e) => setText(e.target.value)}
