@@ -201,7 +201,7 @@ function Description() {
                 </button>
                 <input
                   type="number"
-                  className="w-14 text-center sm:w-20"
+                  className="w-14 text-center sm:w-20 bg-[#FFE1D2]"
                   value={quantity}
                   onChange={(e) => setQuantity(Number(e.target.value))}
                 />
