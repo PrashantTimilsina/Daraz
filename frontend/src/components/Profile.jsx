@@ -9,7 +9,7 @@ function Profile() {
   // const [profileData, setProfileData] = useState([]);
   const { profileData, setProfileData } = useData();
   const [modal, setModal] = useState(false);
-  const [resetPass, setResetPass] = useState(false);
+
   const [file, setFile] = useState();
 
   const navigate = useNavigate();
@@ -39,7 +39,7 @@ function Profile() {
         data,
         { withCredentials: true }
       );
-      const detail = res?.data;
+      const detail = res.data;
       if (res.status === 200) {
         toast.success(detail?.message, { autoClose: 1500 });
 
@@ -57,10 +57,7 @@ function Profile() {
       toast.error(errorMsg, { autoClose: 1500 });
     }
   };
-  function resetPassword(e) {
-    e.preventDefault();
-    setResetPass((reset) => !reset);
-  }
+
   function upload(file) {
     if (!file) {
       toast.error("Upload failed", { autoClose: 1500 });
@@ -112,7 +109,7 @@ function Profile() {
           <img
             src={
               profileData?.user?.image
-                ? `https://daraz-backend-lsuk.onrender.com/images/${profileData?.user?.image}`
+                ? `http://localhost:8000/images/${profileData?.user?.image}`
                 : "https://img.freepik.com/premium-vector/avatar-profile-icon-flat-style-male-user-profile-vector-illustration-isolated-background-man-profile-sign-business-concept_157943-38764.jpg?semt=ais_hybrid"
             }
             alt="profile pic"
@@ -230,31 +227,16 @@ function Profile() {
               </button>
             )}
 
-            <form onSubmit={handleSubmit(onForget)}>
-              {resetPass ? (
-                <input
-                  type="text"
-                  placeholder="Enter your email"
-                  className="w-auto bg-slate-300 px-2 py-1 text-center outline-none sm:w-56 sm:p-2"
-                  {...register("email", {
-                    required: "Enter your email",
-                  })}
-                />
-              ) : (
-                ""
-              )}
-              {resetPass ? (
-                <button className="bg-orange-500 px-3 py-1 text-white sm:px-4 sm:py-2">
-                  Reset Password
-                </button>
-              ) : (
-                <button
-                  className="bg-orange-500 px-3 py-1 text-white sm:px-4 sm:py-2"
-                  onClick={resetPassword}
-                >
-                  Forget password
-                </button>
-              )}
+            <form
+              className="flex items-center justify-center space-y-4"
+              onSubmit={handleSubmit(onForget)}
+            >
+              <button
+                type="submit"
+                className="cursor-pointer rounded bg-yellow-500 px-4 py-2 text-white hover:bg-yellow-600"
+              >
+                Send Reset Link
+              </button>
             </form>
           </div>
         </div>
