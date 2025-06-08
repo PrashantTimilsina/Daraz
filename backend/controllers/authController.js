@@ -169,10 +169,10 @@ exports.changePassword = async (req, res, next) => {
   }
 };
 exports.forgotPassword = async (req, res) => {
-  const { email } = req.body;
+  const userId = req?.user?.id;
 
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findById(userId);
     if (!user) return res.status(404).json({ message: "User not found" });
 
     // Generate reset token
@@ -184,7 +184,7 @@ exports.forgotPassword = async (req, res) => {
     await user.save();
 
     // Send reset email
-    sendEmail(email, user.name, resetToken);
+    sendEmail(user?.email, user?.name, resetToken);
 
     res.json({ message: "Password reset email sent!", token: resetToken });
   } catch (error) {
