@@ -23,7 +23,11 @@ router.post(
   authController.ensureAuthenticated,
   authController.changePassword
 );
-router.post("/forgotPassword", authController.forgotPassword);
+router.post(
+  "/forgotPassword",
+  authController.ensureAuthenticated,
+  authController.forgotPassword
+);
 router.get("/search/:id", authController.search);
 router.delete("/deleteuser", authController.deleteUser);
 router.post("/reset/:token", authController.resetPassword);
